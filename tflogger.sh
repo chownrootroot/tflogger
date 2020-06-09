@@ -12,12 +12,12 @@ fi
 
 while true; do
     sensors > ${strResPath}
-    strCPUTemp=$(cat ${strResPath} | grep "CPU:" | awk '{print $2}')
+    strCPUTemp=$(cat ${strResPath} | grep "CPU:" | awk '{print $2}' | sed 's/\n//g')
     strCore0Temp=$(cat ${strResPath} | grep "Core 0:" | awk '{print $3}')
     strCore1Temp=$(cat ${strResPath} | grep "Core 1:" | awk '{print $3}')
     strCore2Temp=$(cat ${strResPath} | grep "Core 2:" | awk '{print $3}')
     strCore3Temp=$(cat ${strResPath} | grep "Core 3:" | awk '{print $3}')
-    strGPUTemp=$(cat ${strResPath} | grep temp1 | awk '{print $2}')
+    strGPUTemp=$(cat ${strResPath} | grep temp1 | tail -n 1 | awk '{print $2}')
     strProcFan=$(cat ${strResPath} | grep "Processor Fan" | awk '{print $3}')
     strVideoFan=$(cat ${strResPath} | grep "Video Fan" | awk '{print $3}')
     rm ${strResPath}
